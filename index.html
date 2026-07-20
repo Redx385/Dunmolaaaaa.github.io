@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <style>
+        /* Base page styling */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #111; /* Dark background makes glows pop */
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            margin: 60px 0 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            color: #ffb3c6; /* Soft pink text */
+        }
+
+        /* Gallery Layout */
+        .gallery-container {
+            max-width: 800px;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            gap: 50px; /* Controls the space between media and text */
+            margin-bottom: 80px;
+        }
+
+        /* Spaces in between for typing text */
+        .text-block {
+            text-align: center;
+            font-size: 1.25rem;
+            line-height: 1.6;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05); /* Slight highlight */
+            border-radius: 12px;
+        }
+
+        /* Media (Pictures and Videos) */
+        .media-item {
+            width: 100%;
+            border-radius: 15px;
+            object-fit: cover;
+            cursor: pointer;
+            /* Smooth transition for the hover effect */
+            transition: all 0.4s ease-in-out; 
+        }
+
+        /* Hover Glowing Effect */
+        .media-item:hover {
+            /* Adjust the RGBA color here to change the glow color (currently pink) */
+            box-shadow: 0 0 25px rgba(255, 105, 180, 0.8), 0 0 50px rgba(255, 105, 180, 0.5);
+            transform: scale(1.02); /* Slight zoom in */
+        }
+
+        .media-item.pic {
+            height: 900px; /* Fixed height for consistency */
+        }
+
+        .media-item.vid {
+            height: auto;
+            max-height: 900px;
+        }
+        /* Lightbox Container */
+.lightbox {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.95); /* Deep dark background */
+    z-index: 10000; /* Stays on top of everything else */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Enlarged Media Styling */
+.lightbox img, 
+.lightbox video {
+    max-width: 90%;
+    max-height: 85vh; /* Prevents it from stretching off-screen */
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(255, 105, 180, 0.8); /* The pink glow */
+    display: none; /* We will use JavaScript to show either the image or video */
+}
+
+/* The 'X' Close Button */
+.close-lightbox {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: white;
+    font-size: 3rem;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.3s ease;
+}
+
+.close-lightbox:hover {
+    color: #ffb3c6;
+}
+/* Full-screen overlay to force a click */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #111; /* Matches your dark theme */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Keeps it on top of everything */
+}
+
+/* Styling the start button */
+#start-btn {
+    padding: 15px 30px;
+    font-size: 1.5rem;
+    color: #111;
+    background-color: #ffb3c6; /* Matches the soft pink text */
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
+    transition: transform 0.2s ease;
+}
+
+#start-btn:hover {
+    transform: scale(1.05);
+}
+    </style>
+</head>
+<body>
+    <!-- The hidden audio player -->
+<audio id="bg-music" loop>
+    <source src="ThreeNights.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+<!-- The "Click to Enter" overlay -->
+<div id="start-overlay" class="overlay">
+    <button id="start-btn">Press me!!🙄🙄</button>
+</div>
+
+    <div class="header">
+        <h1>Happy Birthday My Pretty,Amazing,wonderful,stunning,Glamorous Bestfrirnd😍😍!!!</h1>
+        <p>Scroll down!!!...</p>
+    </div>
+
+    <div class="gallery-container">
+
+        <!-- Text Space -->
+        <div class="text-block">
+            <p>Thank you for always being there to listen to my problems and needs😭,  even though you air my msg sometimes😔.  I still Love you❤️❤️ 
+            </p>
+        </div>
+
+        <!-- Picture -->
+       <video src="Snapchat-445156384.mp4" autoplay loop muted playsinline class="media-item vid"></video>
+
+
+        <!-- Text Space -->
+        <div class="text-block">
+            <p>Eww girl🙄🙄(I love youu!)</p>
+        </div>
+
+        <!-- Video -->
+        <video src="Snapchat-2129713425.mp4" autoplay loop muted playsinline class="media-item vid"></video>
+
+        <!-- Text Space -->
+        <div class="text-block">
+            <p>😎🥰🤗😮🥵🥶😱😵‍💫🤕🥹</p>
+        </div>
+
+        <!-- Another Picture -->
+        <img src="IMG_20260628_203334_548.jpg" alt="Another fun memory" class="media-item pic">
+    </div>
+<!-- The Lightbox Overlay -->
+<div id="lightbox" class="lightbox">
+    <span class="close-lightbox">&times;</span>
+    <img id="lightbox-img" src="" alt="Enlarged picture">
+    <video id="lightbox-vid" src="" autoplay loop playsinline controls></video>
+</div>
+<script>
+    const startBtn = document.getElementById('start-btn');
+    const overlay = document.getElementById('start-overlay');
+    const bgMusic = document.getElementById('bg-music');
+
+    startBtn.addEventListener('click', () => {
+        // Play the music
+        bgMusic.play();
+        
+        // Hide the overlay so she can see the website
+        overlay.style.display = 'none';
+    });
+</script>
+</body>
+</html>
